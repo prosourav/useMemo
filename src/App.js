@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useMemo, useState } from "react";
+import "./App.css";
 
 function App() {
+  const [counter, setCounter] = useState(1);
+  const [name, setName] = useState("");
+  const result = useMemo(() => {
+    return factorial(counter);
+  }, [counter]);
+
+  const handleIncreament = () => {
+    setCounter(counter + 1);
+  };
+  const handleDecreament = () => {
+    setCounter(counter - 1);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div>
+        <h1>
+          Factorial of {counter} is {result}
+        </h1>
+        <button onClick={handleIncreament}>Increament</button>
+        <button onClick={handleDecreament}>Decremeant</button>
+      </div>
+      <div>
+        <label>Enter Name</label>
+        <br />
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <h3>My Name is {name}</h3>
+      </div>
     </div>
   );
 }
+const factorial = (value) => {
+  for (let i = 0; i < 100000; i++) {
+    console.log(i);
+  }
+  return value * value;
+};
 
 export default App;
