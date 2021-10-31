@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -34,12 +34,20 @@ function App() {
         />
         <h3>My Name is {name}</h3>
       </div>
+      <AnotherUseCase name={name} />
     </div>
   );
 }
+
+// without memo function it call when ever any state get changed in parent component
+const AnotherUseCase = React.memo(() => {
+  console.log("renderd");
+  return <p>My name is </p>;
+});
 const factorial = (value) => {
-  for (let i = 0; i < 100000; i++) {
-    console.log(i);
+  let i = 1;
+  while (i < 1000000000) {
+    i++;
   }
   return value * value;
 };
